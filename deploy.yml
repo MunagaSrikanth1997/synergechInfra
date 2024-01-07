@@ -1,0 +1,19 @@
+name: Terraform Workflow
+
+on:
+  repository_dispatch:
+    types:
+      - deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Trigger Terraform Deployment
+        run: |
+          terraform init
+          terraform apply -auto-approve
